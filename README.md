@@ -15,3 +15,5 @@ This example demonstrates how to build a simple DApp (Voting) with client-side E
  - Based on the Etheres.js library
 
 Slides: https://www.slideshare.net/nakov/clientside-wallets-nakov-at-ethereum-meetup-sofia-april-2018
+
+Video (in Bulgarian language): https://youtu.be/Wi9nZNUC_B8
