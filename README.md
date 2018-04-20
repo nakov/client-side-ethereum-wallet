@@ -12,7 +12,7 @@ This example demonstrates how to build a simple DApp (Voting) with client-side E
  - Use different passwords for server login and for the wallet
     - Server password: HMAC(username, pass). Wallet pass: user's original pass
  - Change password cannot recover the encrypted wallet! -> use the mnemonics
- - Based on the Etheres.js library
+ - Based on the Ethers.js library
 
 Slides: https://www.slideshare.net/nakov/clientside-wallets-nakov-at-ethereum-meetup-sofia-april-2018
 
