@@ -17,3 +17,5 @@ This example demonstrates how to build a simple DApp (Voting) with client-side E
 Slides: https://www.slideshare.net/nakov/clientside-wallets-nakov-at-ethereum-meetup-sofia-april-2018
 
 Video (in Bulgarian language): https://youtu.be/Wi9nZNUC_B8
+
+Video (in English): https://youtu.be/VvTlF4whjj8
