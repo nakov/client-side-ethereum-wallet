@@ -18,4 +18,5 @@ Slides: https://www.slideshare.net/nakov/clientside-wallets-nakov-at-ethereum-me
 
 Video (in Bulgarian language): https://youtu.be/Wi9nZNUC_B8
 
-Video (in English): https://youtu.be/VvTlF4whjj8
+Video (in English): https://youtu.be/7b3Pr7DMSMc
+Screen only video (English): https://youtu.be/VvTlF4whjj8
