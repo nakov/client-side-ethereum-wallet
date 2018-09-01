@@ -138,15 +138,12 @@ $(document).ready(function () {
             let jsonWallet = await wallet.encrypt(
                 walletPassword, {}, showProgressBox);
             
-            let backendUser = CryptoJS.HmacSHA256(
-                username, password + 'backend-user').toString();
-            let backendPass = CryptoJS.HmacSHA256(
-                password, username + 'backend-pass').toString();
+			let walletId = CryptoJS.HmacSHA256(
+                username, password + 'wallet').toString();
             let result = await $.ajax({
                 type: 'POST',
                 url: `/register`,
-                data: JSON.stringify({username: backendUser,
-                    password: backendPass, jsonWallet}),
+                data: JSON.stringify({walletId, jsonWallet}),
                 contentType: 'application/json'
             });
             
@@ -166,17 +163,13 @@ $(document).ready(function () {
     async function login() {
         let username = $('#usernameLogin').val();
         let password = $('#passwordLogin').val();
-
-        let backendUser = CryptoJS.HmacSHA256(
-            username, password + 'backend-user').toString();
-        let backendPass = CryptoJS.HmacSHA256(
-            password, username + 'backend-pass').toString();
+        let walletId = CryptoJS.HmacSHA256(
+            username, password + 'wallet').toString();
         try {
             let result = await $.ajax({
                 type: 'POST',
                 url: `/login`,
-                data: JSON.stringify({username: backendUser,
-                    password: backendPass}),
+                data: JSON.stringify({walletId}),
                 contentType: 'application/json'
             });
             sessionStorage['username'] = username;

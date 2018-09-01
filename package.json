@@ -2,10 +2,10 @@
   "name": "client-side-wallet-voting",
   "version": "1.0.0",
   "description": "Voting DApp with Client-side Ethereum Wallet",
-  "main": "src/voting-server.js",
+  "main": "src/wallet-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd src && node voting-server.js"
+    "start": "cd src && node wallet-server.js"
   },
   "keywords": [
     "Ethereum",
