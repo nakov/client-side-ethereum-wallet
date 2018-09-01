@@ -120,43 +120,37 @@ $(document).ready(function () {
     function hideProgressProgress() {
         $('#progressBox').hide(100);
     }
-
-    async function login() {
-        let username = $('#usernameLogin').val();
-        let walletPassword = $('#passwordLogin').val();
-        let backendPassword = CryptoJS.HmacSHA256(
-            username, walletPassword).toString();
-        try {
-            let result = await $.ajax({
-                type: 'POST',
-                url: `/login`,
-                data: JSON.stringify({username, password: backendPassword}),
-                contentType: 'application/json'
-            });
-            sessionStorage['username'] = username;
-            sessionStorage['jsonWallet'] = result.jsonWallet;
-            showView("viewHome");
-            showInfo(`User "${username}" logged in successfully.`);
-        }
-        catch (err) {
-            showError("Cannot login user. ", err);
-        }
-    }
+	
+	function deriveWalletPassword(username, password) {
+		return CryptoJS.HmacSHA256(password, 
+			username + 'wallet-pass').toString();
+	}
 
     async function register() {
         let username = $('#usernameRegister').val();
-        let walletPassword = $('#passwordRegister').val();
+        let password = $('#passwordRegister').val();
         try {
-            let wallet = ethers.Wallet.createRandom();
-            let jsonWallet = await wallet.encrypt(walletPassword, {}, showProgressBox);
-            let backendPassword = CryptoJS.HmacSHA256(
-                username, walletPassword).toString();
+			extraEntropy = '0x' + CryptoJS.HmacSHA256(
+                password, username + new Date()).toString();
+            let wallet = ethers.Wallet.createRandom({extraEntropy});
+			
+			walletPassword = deriveWalletPassword(username, password);
+            let jsonWallet = await wallet.encrypt(
+				walletPassword, {}, showProgressBox);
+			
+            let backendUser = CryptoJS.HmacSHA256(
+                username, password + 'backend-user').toString();
+            let backendPass = CryptoJS.HmacSHA256(
+                password, username + 'backend-pass').toString();
+			alert('before ajax');
             let result = await $.ajax({
                 type: 'POST',
                 url: `/register`,
-                data: JSON.stringify({username, password: backendPassword, jsonWallet}),
+                data: JSON.stringify({username: backendUser,
+					password: backendPass, jsonWallet}),
                 contentType: 'application/json'
             });
+			
             sessionStorage['username'] = username;
             sessionStorage['jsonWallet'] = jsonWallet;
             showView("viewHome");
@@ -167,6 +161,32 @@ $(document).ready(function () {
         }
         finally {
             hideProgressProgress();
+        }
+    }
+
+    async function login() {
+        let username = $('#usernameLogin').val();
+        let password = $('#passwordLogin').val();
+
+		let backendUser = CryptoJS.HmacSHA256(
+			username, password + 'backend-user').toString();
+		let backendPass = CryptoJS.HmacSHA256(
+			password, username + 'backend-pass').toString();
+        try {
+            let result = await $.ajax({
+                type: 'POST',
+                url: `/login`,
+                data: JSON.stringify({username: backendUser,
+					password: backendPass}),
+                contentType: 'application/json'
+            });
+            sessionStorage['username'] = username;
+            sessionStorage['jsonWallet'] = result.jsonWallet;
+            showView("viewHome");
+            showInfo(`User "${username}" logged in successfully.`);
+        }
+        catch (err) {
+            showError("Cannot login user. ", err);
         }
     }
 
@@ -201,7 +221,9 @@ $(document).ready(function () {
     async function vote(candidateIndex, candidateName) {
         try {
             let jsonWallet = sessionStorage['jsonWallet'];
-            let walletPassword = prompt("Enter your wallet password:");
+            let password = prompt("Enter your wallet password:");
+			walletPassword = deriveWalletPassword(
+				sessionStorage['username'], password);
             let wallet = await ethers.Wallet.fromEncryptedWallet(
                 jsonWallet, walletPassword, showProgressBox);
             let privateKey = wallet.privateKey;
