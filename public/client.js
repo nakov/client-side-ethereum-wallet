@@ -120,37 +120,37 @@ $(document).ready(function () {
     function hideProgressProgress() {
         $('#progressBox').hide(100);
     }
-	
-	function deriveWalletPassword(username, password) {
-		return CryptoJS.HmacSHA256(password, 
-			username + 'wallet-pass').toString();
-	}
+    
+    function deriveWalletPassword(username, password) {
+        return CryptoJS.HmacSHA256(password, 
+            username + 'wallet-pass').toString();
+    }
 
     async function register() {
         let username = $('#usernameRegister').val();
         let password = $('#passwordRegister').val();
         try {
-			extraEntropy = '0x' + CryptoJS.HmacSHA256(
+            extraEntropy = '0x' + CryptoJS.HmacSHA256(
                 password, username + new Date()).toString();
             let wallet = ethers.Wallet.createRandom({extraEntropy});
-			
-			walletPassword = deriveWalletPassword(username, password);
+            
+            walletPassword = deriveWalletPassword(username, password);
             let jsonWallet = await wallet.encrypt(
-				walletPassword, {}, showProgressBox);
-			
+                walletPassword, {}, showProgressBox);
+            
             let backendUser = CryptoJS.HmacSHA256(
                 username, password + 'backend-user').toString();
             let backendPass = CryptoJS.HmacSHA256(
                 password, username + 'backend-pass').toString();
-			alert('before ajax');
+            alert('before ajax');
             let result = await $.ajax({
                 type: 'POST',
                 url: `/register`,
                 data: JSON.stringify({username: backendUser,
-					password: backendPass, jsonWallet}),
+                    password: backendPass, jsonWallet}),
                 contentType: 'application/json'
             });
-			
+            
             sessionStorage['username'] = username;
             sessionStorage['jsonWallet'] = jsonWallet;
             showView("viewHome");
@@ -168,16 +168,16 @@ $(document).ready(function () {
         let username = $('#usernameLogin').val();
         let password = $('#passwordLogin').val();
 
-		let backendUser = CryptoJS.HmacSHA256(
-			username, password + 'backend-user').toString();
-		let backendPass = CryptoJS.HmacSHA256(
-			password, username + 'backend-pass').toString();
+        let backendUser = CryptoJS.HmacSHA256(
+            username, password + 'backend-user').toString();
+        let backendPass = CryptoJS.HmacSHA256(
+            password, username + 'backend-pass').toString();
         try {
             let result = await $.ajax({
                 type: 'POST',
                 url: `/login`,
                 data: JSON.stringify({username: backendUser,
-					password: backendPass}),
+                    password: backendPass}),
                 contentType: 'application/json'
             });
             sessionStorage['username'] = username;
@@ -222,8 +222,8 @@ $(document).ready(function () {
         try {
             let jsonWallet = sessionStorage['jsonWallet'];
             let password = prompt("Enter your wallet password:");
-			walletPassword = deriveWalletPassword(
-				sessionStorage['username'], password);
+            walletPassword = deriveWalletPassword(
+                sessionStorage['username'], password);
             let wallet = await ethers.Wallet.fromEncryptedWallet(
                 jsonWallet, walletPassword, showProgressBox);
             let privateKey = wallet.privateKey;
