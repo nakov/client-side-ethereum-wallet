@@ -142,7 +142,6 @@ $(document).ready(function () {
                 username, password + 'backend-user').toString();
             let backendPass = CryptoJS.HmacSHA256(
                 password, username + 'backend-pass').toString();
-            alert('before ajax');
             let result = await $.ajax({
                 type: 'POST',
                 url: `/register`,
