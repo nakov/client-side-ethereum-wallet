@@ -14,6 +14,14 @@ This example demonstrates how to build a simple DApp (Voting) with client-side E
  - Change password cannot recover the encrypted wallet! -> use the mnemonics
  - Based on the Ethers.js library
  
+## Project Structure
+
+This DApp example is based on JavaScript (server-side + client-side)
+
+`public` - holds the client-side JS app
+`src` - holds the server-side Node.js app
+`contract` - holds the `Voting` solidity contract, published at https://ropsten.etherscan.io/address/0x121241C506ebb1d04A4d8d355D37aC9fd06361de 
+
 ## Running the Demo
 
 1. Download the demo from GitHub:
