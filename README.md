@@ -13,6 +13,42 @@ This example demonstrates how to build a simple DApp (Voting) with client-side E
     - Server password: HMAC(username, pass). Wallet pass: user's original pass
  - Change password cannot recover the encrypted wallet! -> use the mnemonics
  - Based on the Ethers.js library
+ 
+## Project Structure
+
+This DApp example is based on JavaScript (server-side + client-side)
+ - `public` - holds the client-side JS app
+ - `src` - holds the server-side Node.js app
+ - `contract` - holds the `Voting` solidity contract, published at https://ropsten.etherscan.io/address/0x121241C506ebb1d04A4d8d355D37aC9fd06361de 
+
+## Running the Demo
+
+1. Download the demo from GitHub:
+```
+git clone https://github.com/nakov/client-side-ethereum-wallet
+```
+
+2. Go to the project directory:
+```
+cd client-side-ethereum-wallet
+```
+
+3. Install the NPM packages
+```
+npm update
+```
+
+3. Run the server
+```
+npm start
+```
+
+4. Open the project URL from your Web browser:
+```
+http://localhost:80
+```
+
+## Slides and Videos
 
 Slides: https://www.slideshare.net/nakov/clientside-wallets-nakov-at-ethereum-meetup-sofia-april-2018
 
