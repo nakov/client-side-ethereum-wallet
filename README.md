@@ -36,7 +36,7 @@ cd client-side-ethereum-wallet
 
 3. Install the NPM packages
 ```
-npm update
+npm install
 ```
 
 3. Run the server
