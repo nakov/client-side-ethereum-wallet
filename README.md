@@ -10,8 +10,9 @@ This example demonstrates how to build a simple DApp (Voting) with client-side E
  - After login / register, keep the encrypted wallet JSON in the browser session
  - Logout -> clear the browser session
  - Use different passwords for server login and for the wallet
-    - Server password: HMAC(username, pass). Wallet pass: user's original pass
- - Change password cannot recover the encrypted wallet! -> use the mnemonics
+    - Wallet password (client-side): HMAC(password, username + 'wallet')
+    - Server password (wallet id): HMAC(username, password + 'server')
+ - Lost password cannot be recovered / reset -> use the mnemonics
  - Based on the Ethers.js library
  
 ## Project Structure
