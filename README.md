@@ -1,6 +1,8 @@
 # Client-Side Wallet - Demo
 
-This example demonstrates how to build a simple DApp (Voting) with client-side Ethereum wallet. Based on Solidity smart contract and client-side UI (JS + jQuery + Ethers.js) + server-side account management (Node.js + Express + simple REST API). The wallet is encrypted in UTC / JSON format (both private key + mnemonics are encrypted with AES-CRT-128 using SCrypt key derivation).
+Play with the demo now: https://client-side-wallet-demo.herokuapp.com
+
+This demon example demonstrates how to build a simple DApp (Voting) with client-side Ethereum wallet. Based on Solidity smart contract and client-side UI (JS + jQuery + Ethers.js) + server-side account management (Node.js + Express + simple REST API). The wallet is encrypted in UTC / JSON format (both private key + mnemonics are encrypted with AES-CRT-128 using SCrypt key derivation).
  - The app implements register / login / logout / vote.
  - Candidates and votes stay in Solidity contract on the Ropsten testnet.
  - Users register in the system and get a wallet (private key + address)
