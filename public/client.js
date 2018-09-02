@@ -123,7 +123,7 @@ $(document).ready(function () {
     
     function deriveWalletPassword(username, password) {
         return CryptoJS.HmacSHA256(password, 
-            username + 'wallet-pass').toString();
+            username + 'wallet').toString();
     }
 
     async function register() {
@@ -138,8 +138,8 @@ $(document).ready(function () {
             let jsonWallet = await wallet.encrypt(
                 walletPassword, {}, showProgressBox);
             
-			let walletId = CryptoJS.HmacSHA256(
-                username, password + 'wallet').toString();
+            let walletId = CryptoJS.HmacSHA256(
+                username, password + 'server').toString();
             let result = await $.ajax({
                 type: 'POST',
                 url: `/register`,
@@ -164,7 +164,7 @@ $(document).ready(function () {
         let username = $('#usernameLogin').val();
         let password = $('#passwordLogin').val();
         let walletId = CryptoJS.HmacSHA256(
-            username, password + 'wallet').toString();
+            username, password + 'server').toString();
         try {
             let result = await $.ajax({
                 type: 'POST',
