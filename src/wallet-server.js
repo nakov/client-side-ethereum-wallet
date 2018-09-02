@@ -41,7 +41,11 @@ app.post('/register', (req, res) => {
 	console.log('Available wallets at the server:', walletRepo.wallets)
 });
 
-const server = app.listen(80, function(){
+let port = process.argv[2];
+if (!port) port = process.env['PORT'];
+if (!port) port = 80;
+
+const server = app.listen(port, function(){
     console.log('Wallet server started: http://localhost:' + 
 		server.address().port);
 });
