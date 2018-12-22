@@ -55,7 +55,6 @@ http://localhost:80
 
 Slides:
  - https://www.slideshare.net/nakov/clientside-wallets-in-dapps-nakov-blockworld-2018-san-jose
- - https://www.slideshare.net/nakov/clientside-wallets-nakov-at-ethereum-meetup-sofia-april-2018
  
 Videos:
  - https://youtu.be/Wi9nZNUC_B8 (in Bulgarian language, Ethereum meetup, Sofia)
